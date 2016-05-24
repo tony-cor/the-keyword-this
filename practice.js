@@ -2,19 +2,19 @@
   // 1) What is the purpose of the 'this keyword'?
 
       //Answer
-
+//'this is used to refer to an object that the function (where this is used) is bound to. The this keyword not only refers to the //object but it also contains the value of the object.
   // 2) What are the four rules that govern what the 'this keyword' is bound to and describe each?
 
       //Answer
-
+//Implicit, explicit, default and new.
   // 3) What is the difference between call and apply?
 
       //Answer
-
+//Use apply with arrays
   // 4) What does .bind do?
 
       //Answer
-
+//Allows Us to Set the this Value on Methods.
 
 //Next Problem
 
@@ -24,9 +24,15 @@
   //getUsername --> which is a function that returns the current object's username property. *Don't use 'user' instead use the 'this' keyword*
 
     //Code Here
-
+var user = {
+  username: "tony",
+  email: "tonycornetta@gmail.com",
+  getUsername: function(){
+    return this.username;
+  }
+}
 //Now, invoke the getUsername method and verify you got the username of the object and not anything else.
-
+user.getUsername();
 
 //Next Problem
 
@@ -34,6 +40,15 @@
 // Write the function definitions which will make the following function invocations function properly.
 
   //Function Invocations Here
+function Car(make, model, year){
+  this.make = make;
+  this.model = model;
+  this.year = year;
+  this.move = 10;
+  this.moveCar = function() {
+    return this.move;
+  };
+}
 
 var prius = new Car('Toyota', 'Prius', 2011);
 var mustang = new Car('Ford', 'Mustang', 2013);
@@ -55,7 +70,8 @@ var getYear = function(){
 
 //Note(no tests)
   //Code Here
-
+  console.log(getYear.call(prius));
+  console.log(getYear.call(mustang));
 
 //New Problem
 
@@ -71,14 +87,15 @@ var getMyUsername = function(){
   console.log(this.username);
 };
 
-setTimeout(getMyUsername, 5000);
+myUser.call(getMyUsername, 5000);
+//setTimeout(getMyUsername, 5000); This was the original that I'm keeping so I can see what changes to it I made.
 
 //Above you're given an object, a function, and a setTimeout invocation. After 5 seconds, what will the getUsername function return?
 //Note(no tests)
   //Answer Here
-
+'iliketurtles'
 //In the example above, what is the 'this keyword' bound to when getUsername runs?
 
   //Answer Here
-
+myUser
 //Fix the setTimeout invocation so that the user object will be the focal object when getUsername is ran.
